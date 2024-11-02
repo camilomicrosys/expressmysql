@@ -8,10 +8,8 @@ const secret=config.jwt.secret;
 
 //este es el que genera el token al usuario y se le da su duracion
 function asignarToken(data){
-    //este jwt.sign es propio de la libreria jswt, aca retornamos el token asi queda sin vencimiento
-    //return jwt.sign(data,secret);
-    //y asi le ponemos que se venza el token cada x tiempo en segundos
-    const duracionToken=3600;
+    //aca dejamos 2 horas de duracion para el token
+    const duracionToken=7200;
     return jwt.sign(data, secret, { expiresIn: duracionToken });
 
 }

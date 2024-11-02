@@ -1,28 +1,54 @@
 const express = require('express');
-//este es un archivo personalizado que creamos para las respuestas exitosas o erradas
-const respuesta= require('../../red/respuestas');
-//ese index requiere al controlador asi que ya tiene al controlador aca
-const controlador=require('./index');
+// Este es un archivo personalizado que creamos para las respuestas exitosas o erradas
+const respuesta = require('../../red/respuestas');
+// Ese index requiere al controlador así que ya tiene al controlador acá
+const controlador = require('./index');
 
 const router = express.Router();
-//adicionamos el asyn y await por que el modelo para esto que es de base de datos 
-//retorna una promesa
 
+/**
+ * @swagger
+ * tags:
+ *   name: Autenticacion
+ *   description: API para la gestión de autenticación
+ */
 
-
-//ruta para crear un usuario
+/**
+ * @swagger
+ * /api/jwt/login:
+ *   post:
+ *     tags:
+ *       - Autenticacion  # Asegúrate de que esto esté presente
+ *     summary: Iniciar sesión con credenciales de usuario.
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               usuario:
+ *                 type: string
+ *               password:
+ *                 type: string
+ *     responses:
+ *       201:
+ *         description: Inicio de sesión exitoso, se devuelve el token.
+ *       401:
+ *         description: Credenciales inválidas.
+ *       500:
+ *         description: Error en el servidor.
+ */
 router.post('/login', async (req, res) => {
     const data = req.body;
 
     try {
-        //esta funcion me retornaria el token
-        const token = await controlador.login(data.usuario,data.password);
+        // Esta función me retornaría el token
+        const token = await controlador.login(data.usuario, data.password);
         respuesta.success(req, res, token, 201);
     } catch (err) {
         respuesta.error(req, res, err, 500);
     }
 });
 
-
-
-module.exports = router; // Exporta directamente el router
+module.exports = router; 

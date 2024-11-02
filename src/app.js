@@ -1,5 +1,9 @@
 const express=require('express');
 const config=require('./config');
+//estos para la documentacion de swaager
+const swaggerUi = require('swagger-ui-express');
+const swaggerJsDoc = require('swagger-jsdoc');
+
 //se instala con npm para permitir cors npm intall cors
 const cors = require('cors');
 
@@ -17,6 +21,43 @@ app.use(cors());
 //esta siempre va para que se pueda mandar los datos del json raw desde postaman e insertarlos en la db mysql
 // Middleware para analizar cuerpos de solicitud JSON
 app.use(express.json());
+
+// Configuración de Swagger
+const swaggerOptions = {
+    swaggerDefinition: {
+        openapi: '3.0.0', // Versión de OpenAPI
+        info: {
+            title: 'API de Mi Aplicación',
+            version: '1.0.0',
+            description: 'Documentación de la API para mi aplicación',
+        },
+        servers: [
+            {
+                url: `http://localhost:${config.app.port}`, // URL del servidor
+            },
+        ],
+        components: {
+            securitySchemes: {
+                bearerAuth: {
+                    type: 'http',
+                    scheme: 'bearer',
+                    bearerFormat: 'JWT',
+                },
+            },
+        },
+        security: [
+            {
+                bearerAuth: [],
+            },
+        ],
+    },
+    apis: ['./modulos/auth/routes.js','./modulos/users/routes.js', './modulos/libros/routes.js'], 
+};
+
+
+const swaggerDocs = swaggerJsDoc(swaggerOptions);
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+
 
 
 app.set('port',config.app.port);

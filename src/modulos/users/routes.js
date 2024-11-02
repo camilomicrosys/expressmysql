@@ -1,23 +1,32 @@
 const express = require('express');
-//agregamos esto esto se creo personalizado para proteger las rutas 
-//que se este autenticado con jwt para poder acceder
-const seguridad=require('./seguridad');
-//este lo cree yo tambien para obtener los datos del usaer auth con el token como laravel
+const seguridad = require('./seguridad');  // Middleware de seguridad que verifica el token JWT
 const sesionUsuarioJWTMiddleware = require('../../autenticacion/sesionUsuarioJWTMiddleware');
-
-//este es un archivo personalizado que creamos para las respuestas exitosas o erradas
-const respuesta= require('../../red/respuestas');
-//ese index requiere al controlador asi que ya tiene al controlador aca
-const controlador=require('./index');
+const respuesta = require('../../red/respuestas');
+const controlador = require('./index');
 
 const router = express.Router();
-//adicionamos el asyn y await por que el modelo para esto que es de base de datos 
-//retorna una promesa
 
+/**
+ * @swagger
+ * tags:
+ *   name: Users
+ *   description: API para la gestión de usuarios
+ */
 
-
-//ruta para obtener todos los registros de la db se les pasa este para porteger las rutas seguridad es el archivo que creamos aca en esta carpeta seguirdad.js es 
-//el que valida si tiene token de jwt valido o no, solo deja acceder si viene con el token valido
+/**
+ * @swagger
+ * /api/users:
+ *   get:
+ *     summary: Obtener todos los usuarios
+ *     tags: [Users]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: Lista de usuarios obtenida correctamente
+ *       500:
+ *         description: Error en el servidor
+ */
 router.get('/', seguridad, async (req, res) => {
     try {
         const todos = await controlador.todos();
@@ -27,38 +36,91 @@ router.get('/', seguridad, async (req, res) => {
     }
 });
 
-
-// Ruta para obtener los datos del usuario autenticado
-router.get('/datos-usuario/autenticado', sesionUsuarioJWTMiddleware.obtenerDatosUsuario, (req, res) => {
-    // Los datos del usuario autenticado estarán disponibles en req.usuario
+/**
+ * @swagger
+ * /api/users/datos-usuario/autenticado:
+ *   get:
+ *     summary: Obtener los datos del usuario autenticado
+ *     tags: [Users]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: Datos del usuario autenticado
+ *       401:
+ *         description: Usuario no autenticado
+ */
+router.get('/datos-usuario/autenticado', seguridad, sesionUsuarioJWTMiddleware.obtenerDatosUsuario, (req, res) => {
     const usuario = req.usuario;
     res.json(usuario);
 });
 
-//ruta obtener usuario especifico
-router.get('/usuario/:id',seguridad, async  (req, res) => {
-    const id=req.params.id;
+/**
+ * @swagger
+ * /api/users/usuario/{id}:
+ *   get:
+ *     summary: Obtener un usuario específico por ID
+ *     tags: [Users]
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         required: true
+ *         description: ID del usuario a obtener
+ *         schema:
+ *           type: integer
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: Usuario encontrado
+ *       404:
+ *         description: Usuario no encontrado
+ *       500:
+ *         description: Error en el servidor
+ */
+router.get('/usuario/:id', seguridad, async (req, res) => {
+    const id = req.params.id;
 
-    //metemos todo en tr catch para validar que todo este melo
-    try
-    {
-        //obtenemos todos los clientes de la base de datos
-         //como este de todos retorna una promesa en el modelo por eso se accede asi en la ruta
-        const todos=await controlador.usarioEspecifico(id).then((datosrecibidos)=>{
-        //si accedemos a esoto es la misma res.send la misma cosa
-         respuesta.success(req,res,datosrecibidos,200);
-    });
-
-    }catch(err){
-
-        respuesta.error(req,res,err,500);
+    try {
+        const usuario = await controlador.usuarioEspecifico(id);
+        respuesta.success(req, res, usuario, 200);
+    } catch (err) {
+        respuesta.error(req, res, err, 500);
     }
-    
-    
 });
 
-//ruta para crear un usuario
-router.post('/crear',seguridad, async (req, res) => {
+/**
+ * @swagger
+ * /api/users/crear:
+ *   post:
+ *     summary: Crear un nuevo usuario
+ *     tags: [Users]
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               nombre:
+ *                 type: string
+ *               activo:
+ *                 type: boolean
+ *               usuario:
+ *                 type: string
+ *               password:
+ *                 type: string
+ *     responses:
+ *       201:
+ *         description: Usuario creado exitosamente
+ *       400:
+ *         description: Datos inválidos
+ *       500:
+ *         description: Error en el servidor
+ */
+router.post('/crear', seguridad, async (req, res) => {
     const data = req.body;
 
     try {
@@ -69,47 +131,79 @@ router.post('/crear',seguridad, async (req, res) => {
     }
 });
 
-//para actualizar un usuario
-router.put('/update',seguridad, async (req, res) => {
+/**
+ * @swagger
+ * /api/users/update:
+ *   put:
+ *     summary: Actualizar un usuario existente
+ *     tags: [Users]
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               id:
+ *                 type: integer
+ *               nombre:
+ *                 type: string
+ *               activo:
+ *                 type: boolean
+ *     responses:
+ *       200:
+ *         description: Usuario actualizado exitosamente
+ *       400:
+ *         description: Datos inválidos
+ *       500:
+ *         description: Error en el servidor
+ */
+router.put('/update', seguridad, async (req, res) => {
     const data = req.body;
 
     try {
         const result = await controlador.actualizarDato(data);
-        respuesta.success(req, res, result, 201);
+        respuesta.success(req, res, result, 200);
     } catch (err) {
         respuesta.error(req, res, err, 500);
     }
 });
 
+/**
+ * @swagger
+ * /api/users/usuario/{id}:
+ *   delete:
+ *     summary: Eliminar un usuario por ID
+ *     tags: [Users]
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         required: true
+ *         description: ID del usuario a eliminar
+ *         schema:
+ *           type: integer
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: Usuario eliminado exitosamente
+ *       404:
+ *         description: Usuario no encontrado
+ *       500:
+ *         description: Error en el servidor
+ */
+router.delete('/usuario/:id', seguridad, async (req, res) => {
+    const id = req.params.id;
 
-
-
-//ruta para eliminar
-router.delete('/usuario/:id',seguridad, async  (req, res) => {
-    const id=req.params.id;
-
-    //metemos todo en tr catch para validar que todo este melo
-    try
-    {
-        //obtenemos todos los clientes de la base de datos
-         //como este de todos retorna una promesa en el modelo por eso se accede asi en la ruta
-        const todos=await controlador.eliminarUusuario(id).then(()=>{
-        //mandamos una respuesta normalita de node js express
+    try {
+        await controlador.eliminarUsuario(id);
         const message = 'Usuario eliminado exitosamente';
-
-        // Enviar respuesta JSON con la propiedad message
         res.json({ message });
-    });
-
-    }catch(err){
-
-        respuesta.error(req,res,err,500);
+    } catch (err) {
+        respuesta.error(req, res, err, 500);
     }
-    
-    
 });
 
-
-
-
-module.exports = router; // Exporta directamente el router
+module.exports = router;
