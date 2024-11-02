@@ -1,0 +1,369 @@
+{
+	"info": {
+		"_postman_id": "6d226001-7880-4420-913c-14262c90141d",
+		"name": "ApisNodeJSjuju",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "33004280"
+	},
+	"item": [
+		{
+			"name": "serverLocal",
+			"item": [
+				{
+					"name": "users",
+					"item": [
+						{
+							"name": "obtenerTodosUusuarios",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjo0LCJ1c3VhcmlvIjoibWFyaWFVc2VyIiwicGFzc3dvcmQiOiIkMmIkMDUkVm9PSmsza01NaWUudHBxd25WbWFCZWxIZ1hGZEJ6dVhjbTJNc0czeVdNL1FtYnNEc3dCdnkifSwiaWF0IjoxNzMwNTY4OTIxLCJleHAiOjE3MzA1NzYxMjF9.wWBfWgO74HNaT4dp4EWAEtPWxMuluzBlO5xmB5dIuc4",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:3000/api/users",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"users"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "sesionautenticadoTablaAuth",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjpbeyJub21icmUiOiJjYW1pbGluIHBpbmd1aW4iLCJpZCI6MzAsIm5pdmVsIjoic2VuaW9yIn1dLCJpYXQiOjE3MTc1NDMzMDQsImV4cCI6MTcxNzU0MzM2NH0.rQ1crTxI26SOgD30qtxNb_I7AKPVvWwMFqsyH113rEE",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:3000/api/users/datos-usuario/autenticado",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"users",
+										"datos-usuario",
+										"autenticado"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "eliminarUSER",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjo0LCJ1c3VhcmlvIjoibWFyaWFVc2VyIiwicGFzc3dvcmQiOiIkMmIkMDUkVm9PSmsza01NaWUudHBxd25WbWFCZWxIZ1hGZEJ6dVhjbTJNc0czeVdNL1FtYnNEc3dCdnkifSwiaWF0IjoxNzMwNTIwNDU4LCJleHAiOjE3MzA1MjQwNTh9.YrlK8V1WyNEKpjpBjWmwTLa_H7GAbjaZweI2tGKmm1o",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:3000/api/users/usuario/41",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"users",
+										"usuario",
+										"41"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "crearUusario",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjo0LCJ1c3VhcmlvIjoibWFyaWFVc2VyIiwicGFzc3dvcmQiOiIkMmIkMDUkVm9PSmsza01NaWUudHBxd25WbWFCZWxIZ1hGZEJ6dVhjbTJNc0czeVdNL1FtYnNEc3dCdnkifSwiaWF0IjoxNzMwNTIwMzA2LCJleHAiOjE3MzA1MjM5MDZ9.-941Lk-w7uKzKr5J1b24UfFMupFAEjuQNLuMRXJ5VfE",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\":0,\r\n    \"usuario\":\"camilo\",\r\n    \"password\":\"1234\",\r\n    \"nombre\":\"camilo\",\r\n    \"activo\":1\r\n\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/users/crear",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"users",
+										"crear"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "actualzarUusuario",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\":3,\r\n    \"usuario\":\"camiloUser\",\r\n    \"password\":\"1234\",\r\n    \"nombre\":\"camilo\",\r\n    \"activo\":1\r\n\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/users/usuario/crear",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"users",
+										"usuario",
+										"crear"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "loginJWT",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"usuario\":\"mariaUser\",\r\n    \"password\":\"1234\"\r\n\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/jwt/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"jwt",
+										"login"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "libros",
+					"item": [
+						{
+							"name": "obtenerTodosLosLibros",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjo0LCJ1c3VhcmlvIjoibWFyaWFVc2VyIiwicGFzc3dvcmQiOiIkMmIkMDUkVm9PSmsza01NaWUudHBxd25WbWFCZWxIZ1hGZEJ6dVhjbTJNc0czeVdNL1FtYnNEc3dCdnkifSwiaWF0IjoxNzMwNTY4OTIxLCJleHAiOjE3MzA1NzYxMjF9.wWBfWgO74HNaT4dp4EWAEtPWxMuluzBlO5xmB5dIuc4",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:3000/api/libros",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"libros"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "obtenelibrobyid",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjo0LCJ1c3VhcmlvIjoibWFyaWFVc2VyIiwicGFzc3dvcmQiOiIkMmIkMDUkVm9PSmsza01NaWUudHBxd25WbWFCZWxIZ1hGZEJ6dVhjbTJNc0czeVdNL1FtYnNEc3dCdnkifSwiaWF0IjoxNzMwNTY4OTIxLCJleHAiOjE3MzA1NzYxMjF9.wWBfWgO74HNaT4dp4EWAEtPWxMuluzBlO5xmB5dIuc4",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:3000/api/libros/libro/2",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"libros",
+										"libro",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "eliminarLibro",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjo0LCJ1c3VhcmlvIjoibWFyaWFVc2VyIiwicGFzc3dvcmQiOiIkMmIkMDUkVm9PSmsza01NaWUudHBxd25WbWFCZWxIZ1hGZEJ6dVhjbTJNc0czeVdNL1FtYnNEc3dCdnkifSwiaWF0IjoxNzMwNTY4OTIxLCJleHAiOjE3MzA1NzYxMjF9.wWBfWgO74HNaT4dp4EWAEtPWxMuluzBlO5xmB5dIuc4",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:3000/api/libros/libro/4",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"libros",
+										"libro",
+										"4"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "crearLibro",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjo0LCJ1c3VhcmlvIjoibWFyaWFVc2VyIiwicGFzc3dvcmQiOiIkMmIkMDUkVm9PSmsza01NaWUudHBxd25WbWFCZWxIZ1hGZEJ6dVhjbTJNc0czeVdNL1FtYnNEc3dCdnkifSwiaWF0IjoxNzMwNTY4OTIxLCJleHAiOjE3MzA1NzYxMjF9.wWBfWgO74HNaT4dp4EWAEtPWxMuluzBlO5xmB5dIuc4",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"titulo\":\"Cien años de soledad\",\r\n    \"autor\":\"gabriel garcia\",\r\n    \"anio_publicacion\":\"1984\",\r\n    \"estado\":\"disponible\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/libros/crear",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"libros",
+										"crear"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "actualizarLibro",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjo0LCJ1c3VhcmlvIjoibWFyaWFVc2VyIiwicGFzc3dvcmQiOiIkMmIkMDUkVm9PSmsza01NaWUudHBxd25WbWFCZWxIZ1hGZEJ6dVhjbTJNc0czeVdNL1FtYnNEc3dCdnkifSwiaWF0IjoxNzMwNTY5MjgxLCJleHAiOjE3MzA1NzY0ODF9.q2aMUY9zvdYye2cT2DhwbWAbBXtsP_6RU1qHta9yUIg",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"id\": 2,\r\n  \"titulo\": \"actualizado\",\r\n  \"autor\": \"alejandra\",\r\n  \"anio_publicacion\": \"2021\",\r\n  \"estado\": \"disponible\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/libros/update",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"libros",
+										"update"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}
