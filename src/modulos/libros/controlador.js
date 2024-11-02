@@ -52,13 +52,20 @@ function eliminarLibro(id){
   
     return db.eliminar(TABLA, id);
 }
+
+//buscar libros
+function buscarLibros(palabra){
+   return db.buscarLibros(TABLA,palabra);
+}
+
 //exportamos las funciones
 return{
     todos,
     libroPorId,
     eliminarLibro,
     agregarDato,
-    actualizarDato
+    actualizarDato,
+    buscarLibros
 }
    
 }

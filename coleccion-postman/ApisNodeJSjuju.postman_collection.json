@@ -234,6 +234,47 @@
 							"response": []
 						},
 						{
+							"name": "buscador",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjo0LCJ1c3VhcmlvIjoibWFyaWFVc2VyIiwicGFzc3dvcmQiOiIkMmIkMDUkVm9PSmsza01NaWUudHBxd25WbWFCZWxIZ1hGZEJ6dVhjbTJNc0czeVdNL1FtYnNEc3dCdnkifSwiaWF0IjoxNzMwNTY5MjgxLCJleHAiOjE3MzA1NzY0ODF9.q2aMUY9zvdYye2cT2DhwbWAbBXtsP_6RU1qHta9yUIg",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"palabra\":\"ale\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/libros/buscar",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"libros",
+										"buscar"
+									]
+								}
+							},
+							"response": []
+						},
+						{
 							"name": "obtenelibrobyid",
 							"request": {
 								"method": "GET",

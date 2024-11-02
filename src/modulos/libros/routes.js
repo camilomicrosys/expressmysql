@@ -224,4 +224,41 @@ router.delete('/libro/:id', seguridad, async (req, res) => {
     }
 });
 
+/**
+ * @swagger
+ * /api/libros/buscar:
+ *   post:
+ *     summary: Buscar libros por una palabra clave.
+ *     tags: [Libros]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               palabra:
+ *                 type: string
+ *                 description: Palabra clave para buscar en los libros.
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: Lista de libros que coinciden con la búsqueda.
+ *       400:
+ *         description: Solicitud inválida.
+ *       500:
+ *         description: Error en el servidor.
+ */
+router.post('/buscar', async (req, res) => {
+    const { palabra } = req.body;
+
+    try {
+        const resultados = await controlador.buscarLibros(palabra);
+        respuesta.success(req, res, resultados, 200);
+    } catch (err) {
+        respuesta.error(req, res, err, 500);
+    }
+});
+
 module.exports = router;

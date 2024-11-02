@@ -108,6 +108,32 @@ function query(tabla, consulta) {
     });
 }
 
+//este para el buscador de libros
+function buscarLibros(tabla, valor) {
+    return new Promise((resolve, reject) => {
+        // Validamos que el valor no esté vacío
+        if (!valor) {
+            return reject(new Error('El valor de búsqueda no puede estar vacío.'));
+        }
+
+        // Construimos la consulta SQL para buscar en los campos relevantes
+        const query = `SELECT * FROM ${tabla} WHERE 
+            titulo LIKE ? OR 
+            autor LIKE ? OR 
+            anio_publicacion LIKE ? OR 
+            estado LIKE ?`;
+        
+        // Usamos el valor buscado con comodines
+        const valorBuscado = `%${valor}%`; // Para coincidencias parciales
+
+        // Ejecutamos la consulta con los mismos valores para cada campo
+        conexion.query(query, [valorBuscado, valorBuscado, valorBuscado, valorBuscado], (error, result) => {
+            return error ? reject(error) : resolve(result);
+        });
+    });
+}
+
+
 
 // Exportamos todos los métodos
 module.exports = {
@@ -116,5 +142,6 @@ module.exports = {
     agregarDato,
     eliminar,
     actualizarDato,
-    query
+    query,
+    buscarLibros
 }
