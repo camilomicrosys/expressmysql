@@ -7,6 +7,7 @@ const cors = require('cors');
 //esta es la de jwt
 const authjwt=require('./modulos/auth/routes');
 const users=require('./modulos/users/routes');
+const libros=require('./modulos/libros/routes');
 
 const app=express();
 
@@ -25,6 +26,8 @@ app.set('port',config.app.port);
 app.use('/api/jwt',authjwt);
 //esta la ruta de usuarios en carpeta useres
 app.use('/api/users',users);
+//ruta de libros
+app.use('/api/libros',libros); 
 
 
 module.exports=app;

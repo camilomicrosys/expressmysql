@@ -36,7 +36,7 @@ router.get('/datos-usuario/autenticado', sesionUsuarioJWTMiddleware.obtenerDatos
 });
 
 //ruta obtener usuario especifico
-router.get('/usuario/:id',seguridad, async  (req, res) => {
+router.get('/libro/:id',seguridad, async  (req, res) => {
     const id=req.params.id;
 
     //metemos todo en tr catch para validar que todo este melo
@@ -44,7 +44,7 @@ router.get('/usuario/:id',seguridad, async  (req, res) => {
     {
         //obtenemos todos los clientes de la base de datos
          //como este de todos retorna una promesa en el modelo por eso se accede asi en la ruta
-        const todos=await controlador.usarioEspecifico(id).then((datosrecibidos)=>{
+        const todos=await controlador.libroPorId(id).then((datosrecibidos)=>{
         //si accedemos a esoto es la misma res.send la misma cosa
          respuesta.success(req,res,datosrecibidos,200);
     });
