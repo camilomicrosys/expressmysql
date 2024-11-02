@@ -3,6 +3,10 @@ const config=require('./config');
 //se instala con npm para permitir cors npm intall cors
 const cors = require('cors');
 
+//traemos las rutas
+//esta es la de jwt
+const authjwt=require('./modulos/auth/routes');
+const users=require('./modulos/users/routes');
 
 const app=express();
 
@@ -17,7 +21,10 @@ app.use(express.json());
 app.set('port',config.app.port);
 
 
-
+//esta es la ruta para autenticar con jwt el login
+app.use('/api/jwt',authjwt);
+//esta la ruta de usuarios en carpeta useres
+app.use('/api/users',users);
 
 
 module.exports=app;
