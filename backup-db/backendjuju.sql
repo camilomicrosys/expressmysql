@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 02-11-2024 a las 18:45:22
+-- Tiempo de generación: 03-11-2024 a las 18:26:56
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.6
 
@@ -59,11 +59,10 @@ CREATE TABLE `libros` (
 --
 
 INSERT INTO `libros` (`id`, `titulo`, `autor`, `anio_publicacion`, `estado`) VALUES
-(1, 'principito', 'camilo', 2024, 'disponible'),
-(2, 'actualizado', 'alejandra', 2021, 'disponible'),
-(3, 'exito', 'exitoso', 2023, 'disponible'),
-(5, 'string', 'string', 2021, 'disponible'),
-(7, 'Cien años de soledad', 'gabriel garcia', 1984, 'disponible');
+(1, 'Cien años de soledad', 'Gabriel García Márquez', 1967, 'disponible'),
+(2, 'Don Quijote de la Mancha', 'Miguel de Cervantes', 0000, 'reservado'),
+(3, 'El amor en los tiempos del cólera', 'Gabriel García Márquez', 1985, 'disponible'),
+(5, 'La sombra del viento', 'Carlos Ruiz Zafón', 2001, 'reservado');
 
 -- --------------------------------------------------------
 
@@ -120,7 +119,7 @@ ALTER TABLE `auth`
 -- AUTO_INCREMENT de la tabla `libros`
 --
 ALTER TABLE `libros`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `users`
